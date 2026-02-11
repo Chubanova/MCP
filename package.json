@@ -1,0 +1,28 @@
+{
+  "name": "mcp-server",
+  "version": "1.0.0",
+  "description": "Простой MCP-сервер с кастомными инструментами",
+  "main": "index.js",
+  "scripts": {
+    "start": "node src/index.js",
+    "dev": "nodemon src/index.js",
+    "test": "jest"
+  },
+  "keywords": [
+    "mcp",
+    "server",
+    "ai",
+    "tools"
+  ],
+  "author": "SourceCraft",
+  "license": "MIT",
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.0.0",
+    "dotenv": "^16.0.3",
+    "zod": "^3.22.4"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.1",
+    "jest": "^29.6.2"
+  }
+}

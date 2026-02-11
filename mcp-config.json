@@ -1,0 +1,12 @@
+{
+  "mcpServers": {
+    "simple-mcp-server": {
+      "command": "node",
+      "args": ["src/index.js"],
+      "env": {
+        "PROJECT_PATH": ".",
+        "ALLOWED_COMMANDS": "npm test,eslint src/,npm run lint"
+      }
+    }
+  }
+}
