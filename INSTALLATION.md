@@ -26,6 +26,66 @@ npm --version
 npm install
 ```
 
+## Настройка конфигурации MCP-сервера
+
+Для корректной работы MCP-сервера необходимо настроить файл `mcp-config.json`. Есть два варианта настройки:
+
+### Вариант 1: Абсолютный путь (рекомендуется для локальной разработки)
+
+Откройте файл `mcp-config.json` и измените значение `PROJECT_PATH` на абсолютный путь к директории проекта:
+
+```json
+{
+  "mcpServers": {
+    "simple-mcp-server": {
+      "command": "node",
+      "args": ["src/index.js"],
+      "env": {
+        "PROJECT_PATH": "/полный/путь/к/проекту",
+        "ALLOWED_COMMANDS": "npm test,eslint src/,npm run lint"
+      }
+    }
+  }
+}
+```
+
+### Вариант 2: Использование npm link
+
+1. Добавьте в `package.json` секцию `bin`:
+
+```json
+{
+  "name": "mcp-server",
+  "version": "1.0.0",
+  "bin": {
+    "simple-mcp-server": "./src/index.js"
+  },
+  // ... остальные настройки
+}
+```
+
+2. Выполните команду `npm link` в директории проекта:
+
+```bash
+npm link
+```
+
+3. Обновите `mcp-config.json`:
+
+```json
+{
+  "mcpServers": {
+    "simple-mcp-server": {
+      "command": "simple-mcp-server",
+      "env": {
+        "PROJECT_PATH": ".",
+        "ALLOWED_COMMANDS": "npm test,eslint src/,npm run lint"
+      }
+    }
+  }
+}
+```
+
 ## Запуск MCP-сервера
 
 После установки зависимостей вы можете запустить сервер:
@@ -38,3 +98,8 @@ npm start
 
 ```bash
 npm run dev
+```
+
+## Тестирование работы сервера
+
+Для тестирования работы сервера можно использовать примеры из файла `docs/testing-examples.md`. Логи работы сервера выводятся в stderr и содержат информацию о вызовах инструментов.

@@ -1,0 +1,50 @@
+# Зависимости проекта
+node_modules/
+
+# Файлы среды
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# Логи
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.pnpm-debug.log*
+
+# Результаты сборки
+dist/
+build/
+out/
+
+# Кэш
+.nyc_output/
+coverage/
+.cache/
+
+# Временные файлы
+tmp/
+temp/
+
+# Файлы редактора
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# Операционная система
+.DS_Store
+Thumbs.db
+
+# Документация
+docs/*.md
+!docs/README.md
+
+# Конфигурационные файлы
+mcp-config.json
+
+# Установочные файлы
+*.msi

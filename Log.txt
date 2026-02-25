@@ -1,0 +1,7 @@
+PS E:\PersonalProjects\MCP> node src/index.js
+(node:75456) [MODULE_TYPELESS_PACKAGE_JSON] Warning: Module type of file:///E:/PersonalProjects/MCP/src/index.js is not specified and it doesn't parse as CommonJS.
+Reparsing as ES module because module syntax was detected. This incurs a performance overhead.
+To eliminate this warning, add "type": "module" to E:\PersonalProjects\MCP\package.json.     
+(Use `node --trace-warnings ...` to show where the warning was created)
+[MCP] [INFO] 2026-02-25T18:01:21.828Z: Запуск MCP сервера
+[MCP] [INFO] 2026-02-25T18:01:21.831Z: MCP сервер запущен и готов к работе

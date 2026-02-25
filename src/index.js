@@ -31,6 +31,24 @@ function logToolResult(toolName, result, isError = false) {
   }
 }
 
+// Расширенное логирование
+function logInfo(message) {
+  console.error(`[MCP] [INFO] ${new Date().toISOString()}: ${message}`);
+}
+
+function logError(message) {
+  console.error(`[MCP] [ERROR] ${new Date().toISOString()}: ${message}`);
+}
+
+function logDebug(message) {
+  if (process.env.DEBUG === 'true') {
+    console.error(`[MCP] [DEBUG] ${new Date().toISOString()}: ${message}`);
+  }
+}
+
+// Логирование запуска сервера
+logInfo('Запуск MCP сервера');
+
 // Инструмент 1: Doc/Code context tool
 server.tool(
   "get_documentation",
@@ -123,7 +141,7 @@ server.tool(
 server.tool(
   "run_command",
   {
-    command: z.string().describe("Команда для выполнения"),
+    command: z.string().describe("Команда операционной системы для выполнения (например, \"ls\" или \"touch\")"),
     args: z.array(z.string()).optional().describe("Аргументы команды")
   },
   async ({ command, args = [] }) => {
@@ -150,11 +168,14 @@ server.tool(
       }
       
       // Выполнение команды
+      logDebug(`Выполнение команды: ${fullCommand}`);
       const result = await new Promise((resolve, reject) => {
         exec(fullCommand, { cwd: process.env.PROJECT_PATH || "." }, (error, stdout, stderr) => {
           if (error) {
+            logError(`Ошибка выполнения команды: ${error.message}`);
             reject({ error: error.message, stderr });
           } else {
+            logDebug(`Команда выполнена успешно. STDOUT: ${stdout.length} символов, STDERR: ${stderr.length} символов`);
             resolve({ stdout, stderr });
           }
         });
@@ -195,9 +216,9 @@ async function startServer() {
   try {
     const transport = new StdioServerTransport();
     await server.connect(transport);
-    console.error('MCP сервер запущен и готов к работе');
+    logInfo('MCP сервер запущен и готов к работе');
   } catch (error) {
-    console.error('Ошибка запуска MCP сервера:', error);
+    logError(`Ошибка запуска MCP сервера: ${error.message}`);
     process.exit(1);
   }
 }
